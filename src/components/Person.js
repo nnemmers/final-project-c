@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Person.css";
 
 function Person(props) {
   return (
-    <div class="person">
-      <img class="person__image" src="#" />
+    <li class="person">
+      <img class="person__image" src={`/assets/${props.person.lastName}.jpg`} />
       <p>
         {props.person.firstName} {props.person.lastName}
       </p>
-      <Link>
+      <Link to={`/profile/${props.person.id}`}>
         <button>&gt;</button>
       </Link>
-    </div>
+    </li>
   );
 }
 

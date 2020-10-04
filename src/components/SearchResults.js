@@ -6,7 +6,7 @@ import Person from "./Person";
 
 function SearchResults() {
   const location = useLocation();
-  const searchTerm = location.state.search;
+  const searchTerm = location.state.search.toLowerCase();
   console.log("Search term: ", searchTerm);
   console.log("people: ", people);
   const searchResults = [];
