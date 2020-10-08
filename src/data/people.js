@@ -10,7 +10,7 @@ const peopleData = [
   },
   {
     id: 2,
-    firstName: "Vittorio",
+    firstName: "Victor",
     lastName: "Esplin",
     phone: "531-154-7424",
     mobile: "543-718-3534",
@@ -29,7 +29,7 @@ const peopleData = [
   {
     id: 4,
     firstName: "Anderea",
-    lastName: "Le Grys",
+    lastName: "LeGrys",
     phone: "371-655-0293",
     mobile: "689-603-7062",
     email: "alegrys3@whitehouse.gov",
@@ -37,7 +37,7 @@ const peopleData = [
   },
   {
     id: 5,
-    firstName: "Cordelie",
+    firstName: "Cory",
     lastName: "Degenhardt",
     phone: "159-709-9169",
     mobile: "149-592-8194",
@@ -82,11 +82,11 @@ const peopleData = [
   },
   {
     id: 10,
-    firstName: "Kathlin",
+    firstName: "Matt",
     lastName: "Putten",
     phone: "918-928-4387",
     mobile: "885-221-9126",
-    email: "kputten9@google.ca",
+    email: "mputten9@google.ca",
     desk: 335,
   },
   {

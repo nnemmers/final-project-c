@@ -23,6 +23,7 @@ function Home(props) {
           className="home__input"
           type="text"
           name="search"
+          defaultValue="(name)"
           required
         />
         <button className="home__button" type="submit">

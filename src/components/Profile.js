@@ -62,17 +62,29 @@ function Profile(props) {
         <button onClick={saveToFavorites}>Add</button>
       )}
       <img class="profile__image" src={`/assets/${foundPerson.lastName}.jpg`} />
-      <p>
+      <p class="name">
         {foundPerson.firstName} {foundPerson.lastName}
       </p>
-      <label>Office Phone</label>
-      <p>{foundPerson.phone}</p>
-      <label>Mobile</label>
-      <p>{foundPerson.mobile}</p>
-      <label>Email</label>
-      <p>{foundPerson.email}</p>
-      <label>Desk</label>
-      <p>{foundPerson.desk}</p>
+      <p>
+        <label>Office Phone</label>
+        <br></br>
+        {foundPerson.phone}
+      </p>
+      <p>
+        <label>Mobile</label>
+        <br></br>
+        {foundPerson.mobile}
+      </p>
+      <p>
+        <label>Email</label>
+        <br></br>
+        <a href="{foundPerson.email}">{foundPerson.email}</a>
+      </p>
+      <p>
+        <label>Desk</label>
+        <br></br>
+        {foundPerson.desk}
+      </p>
     </div>
   );
 }

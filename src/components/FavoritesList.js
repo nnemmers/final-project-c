@@ -13,7 +13,7 @@ function FavoritesList() {
   }, []);
 
   return (
-    <div>
+    <div className="favorites">
       <h2> Your Favorites </h2>
       {favorites.map((person) => (
         <Person person={person} />

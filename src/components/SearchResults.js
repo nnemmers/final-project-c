@@ -26,7 +26,7 @@ function SearchResults() {
   if (searchResults.length === 0) {
     return (
       <div class="search">
-        <h3 class="search__header">Results for {searchTerm}</h3>
+        <h3 class="search__header">Results for: {searchTerm}</h3>
         <p>No results found </p>
       </div>
     );
