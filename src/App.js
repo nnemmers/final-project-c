@@ -8,7 +8,7 @@ import FavoritesList from "./components/FavoritesList";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // This app is responsible for routing and loading the appropriate page within the application
-
+// Header will always appear above every page
 function App() {
   return (
     <BrowserRouter>

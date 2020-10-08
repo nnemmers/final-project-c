@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./Profile.css";
 import People from "../data/people";
 
@@ -7,9 +7,9 @@ function Profile(props) {
   const params = useParams();
   const [foundPerson, setFoundPerson] = useState({});
   const [isFavorited, setIsFavorited] = useState(false);
-  console.log(params);
   const personId = parseInt(params.id);
 
+  // Run the code in this block once we visit the favorites page
   useEffect(() => {
     const existingFavorites = JSON.parse(localStorage.getItem("favorites"));
     for (let i = 0; i < People.length; i++) {
@@ -27,9 +27,7 @@ function Profile(props) {
         }
       }
     }
-  }, []);
-
-  console.log("foundPerson", foundPerson, isFavorited);
+  }, [personId]);
 
   const saveToFavorites = () => {
     let existingFavorites = JSON.parse(localStorage.getItem("favorites"));
@@ -55,14 +53,22 @@ function Profile(props) {
   };
 
   return (
-    <div class="profile">
+    <div className="profile">
+      <img
+        className="profile__image"
+        src={`/assets/${foundPerson.lastName}.jpg`}
+        alt="Profile"
+      />
       {isFavorited ? (
-        <button onClick={removeFromFavorites}>Remove</button>
+        <button className="profile__remove" onClick={removeFromFavorites}>
+          Remove
+        </button>
       ) : (
-        <button onClick={saveToFavorites}>Add</button>
+        <button className="profile__add" onClick={saveToFavorites}>
+          Add
+        </button>
       )}
-      <img class="profile__image" src={`/assets/${foundPerson.lastName}.jpg`} />
-      <p class="name">
+      <p className="name">
         {foundPerson.firstName} {foundPerson.lastName}
       </p>
       <p>

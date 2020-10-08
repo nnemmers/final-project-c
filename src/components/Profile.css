@@ -1,4 +1,30 @@
 .profile__image {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  margin-top: 1em;
+  border-radius: 50%;
+}
+
+.profile__remove {
+  border: 1px solid #fd4221;
+  background: transparent;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+
+.profile__add {
+  border: 1px solid #21d6fd;
+  background: transparent;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 1em;
 }

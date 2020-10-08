@@ -4,13 +4,17 @@ import "./Person.css";
 
 function Person(props) {
   return (
-    <li class="person">
-      <img class="person__image" src={`/assets/${props.person.lastName}.jpg`} />
-      <p>
-        {props.person.firstName} {props.person.lastName}
-      </p>
-      <Link to={`/profile/${props.person.id}`}>
-        <button>&gt;</button>
+    <li className="person">
+      <Link className="person__link" to={`/profile/${props.person.id}`}>
+        <img
+          className="person__image"
+          src={`/assets/${props.person.lastName}.jpg`}
+          alt="Person's thumbnail"
+        />
+        <p>
+          {props.person.firstName} {props.person.lastName}
+        </p>
+        <button className="person__button">&gt;</button>
       </Link>
     </li>
   );

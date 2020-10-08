@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useRouteMatch, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import people from "../data/people";
 import Person from "./Person";
 // The Search takes the input of the user and qureies the directory to return matched people listsings
@@ -25,18 +25,18 @@ function SearchResults() {
 
   if (searchResults.length === 0) {
     return (
-      <div class="search">
-        <h3 class="search__header">Results for: {searchTerm}</h3>
+      <div className="search">
+        <h3 className="search__header">Results for: {searchTerm}</h3>
         <p>No results found </p>
       </div>
     );
   } else {
     return (
-      <div class="search">
-        <h3 class="search__header">Results for {searchTerm}</h3>
+      <div className="search">
+        <h3 className="search__header">Results for {searchTerm}</h3>
         <ul>
           {searchResults.map((person) => (
-            <Person person={person} />
+            <Person key={person.id} person={person} />
           ))}
         </ul>
       </div>

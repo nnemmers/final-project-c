@@ -1,13 +1,28 @@
 .person {
+  list-style-type: none;
+}
+
+.person__link {
   /* Takes all the children in the person container and puts it on the same line */
+  width: 85%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #191919;
+  margin: 0 auto;
 }
 
 .person__image {
   max-width: 50px;
   height: auto;
   border-radius: 50%;
+}
+
+.person__button {
+  border: 1px solid #21d6fd;
+  background-color: transparent;
+  color: #21d6fd;
+  font-size: 20px;
+  padding: 4px 8px;
+  cursor: pointer;
 }

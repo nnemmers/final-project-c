@@ -154,7 +154,7 @@ const peopleData = [
   },
   {
     id: 18,
-    firstName: "Demetra",
+    firstName: "Demie",
     lastName: "Chicchelli",
     phone: "217-821-9929",
     mobile: "576-162-2287",

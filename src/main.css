@@ -48,28 +48,10 @@ a:visited {
   color: #21d6fd;
 }
 
-/* focused link */
-a:focus {
-  background-color: rgb(174, 0, 180);
-  color: white;
-}
-
 /* hovered link */
 
 .welcome-message {
   font-size: 1.25rem;
-}
-
-.header {
-  background-color: #191919;
-}
-.header__image {
-  width: 100px;
-  margin-top: 50px;
-}
-
-.search__header {
-  background-color: #191919;
 }
 
 .footer {

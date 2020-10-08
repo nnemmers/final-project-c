@@ -16,7 +16,7 @@ function FavoritesList() {
     <div className="favorites">
       <h2> Your Favorites </h2>
       {favorites.map((person) => (
-        <Person person={person} />
+        <Person key={person.id} person={person} />
       ))}
     </div>
   );
