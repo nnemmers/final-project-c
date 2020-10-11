@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Person from "./Person";
-// FavorirstList represents the listing of people who have been added to the user's favorites list
+// FavoritesList represents the listing of people who have been added to the user's favorites list
 
 function FavoritesList() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
+    // Grab the list of favorites from our browser storage to display
     const existingFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (existingFavorites !== null) {
       setFavorites(existingFavorites);

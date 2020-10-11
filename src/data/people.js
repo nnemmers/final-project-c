@@ -136,7 +136,7 @@ const peopleData = [
   },
   {
     id: 16,
-    firstName: "Basilio",
+    firstName: "Baren",
     lastName: "Marshfield",
     phone: "474-545-2953",
     mobile: "353-617-7667",

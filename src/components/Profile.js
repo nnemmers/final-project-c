@@ -7,7 +7,7 @@ function Profile(props) {
   const params = useParams();
   const [foundPerson, setFoundPerson] = useState({});
   const [isFavorited, setIsFavorited] = useState(false);
-  const personId = parseInt(params.id);
+  const personId = parseInt(params.id); // Grab the ID of the person from the URL
 
   // Run the code in this block once we visit the favorites page
   useEffect(() => {
@@ -18,6 +18,7 @@ function Profile(props) {
         setFoundPerson(person);
       }
     }
+    // Check to see if the user is already favorited
     if (existingFavorites !== null) {
       for (let i = 0; i < existingFavorites.length; i++) {
         const person = existingFavorites[i];
@@ -29,17 +30,21 @@ function Profile(props) {
     }
   }, [personId]);
 
+  // Function that gets executed when the user presses add
   const saveToFavorites = () => {
+    // Grab any existing favorites from our browser storage
     let existingFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (existingFavorites == null) {
       existingFavorites = [];
     }
+    // Overwrite the browser storage with the new favorited person
     existingFavorites.push(foundPerson);
     localStorage.setItem("favorites", JSON.stringify(existingFavorites));
     setIsFavorited(true);
   };
 
   const removeFromFavorites = () => {
+    // Remove the person from the favorites list stored in our browser
     let existingFavorites = JSON.parse(localStorage.getItem("favorites"));
     for (let i = 0; i < existingFavorites.length; i++) {
       const person = existingFavorites[i];
