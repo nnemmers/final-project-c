@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Person.css";
 
 function Person(props) {
+  console.log("Props", props);
   return (
     <li className="person">
       <Link className="person__link" to={`/profile/${props.person.id}`}>

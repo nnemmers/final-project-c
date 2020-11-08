@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Profile.css";
-import People from "../data/people";
+import { peopleCollection } from "../data/firebase";
 
 function Profile(props) {
   const params = useParams();
   const [foundPerson, setFoundPerson] = useState({});
   const [isFavorited, setIsFavorited] = useState(false);
-  const personId = parseInt(params.id); // Grab the ID of the person from the URL
+  const personId = params.id; // Grab the ID of the person from the URL
 
   // Run the code in this block once we visit the favorites page
   useEffect(() => {
+    const getPersonById = async () => {
+      const snapshot = await peopleCollection.doc(personId).get();
+      console.log("snapshot", snapshot.doc);
+    };
+    getPersonById();
     const existingFavorites = JSON.parse(localStorage.getItem("favorites"));
-    for (let i = 0; i < People.length; i++) {
-      const person = People[i];
-      if (person.id === personId) {
-        setFoundPerson(person);
-      }
-    }
     // Check to see if the user is already favorited
     if (existingFavorites !== null) {
       for (let i = 0; i < existingFavorites.length; i++) {

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import people from "../data/people";
+import { peopleCollection } from "../data/firebase";
 import Person from "./Person";
 // The Search takes the input of the user and qureies the directory to return matched people listsings
 
 function SearchResults() {
   const location = useLocation();
   const searchTerm = location.state.search.toLowerCase();
+  const [people, setPeople] = useState([]);
   console.log("Search term: ", searchTerm);
   console.log("people: ", people);
   const searchResults = [];
   for (let i = 0; i < people.length; i++) {
-    const person = people[i];
+    const personId = people[i].id;
+    const person = people[i].data();
+    person.id = personId;
+    console.log("Person", person);
     const fullName = person.firstName + person.lastName;
     const lowercaseFullName = fullName.toLowerCase();
     console.log("lowercaseFullName", lowercaseFullName);
@@ -20,7 +24,14 @@ function SearchResults() {
       searchResults.push(person);
     }
   }
-
+  useEffect(() => {
+    const getPeople = async () => {
+      const snapshot = await peopleCollection.get();
+      console.log("snapshot", snapshot.docs);
+      setPeople(snapshot.docs);
+    };
+    getPeople();
+  }, []);
   console.log(searchResults);
 
   if (searchResults.length === 0) {
