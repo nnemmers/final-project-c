@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { peopleCollection } from "../data/firebase";
 import Person from "./Person";
+import LoadingSpinner from "./LoadingSpinner";
 // The Search takes the input of the user and qureies the directory to return matched people listsings
 
 function SearchResults() {
   const location = useLocation();
   const searchTerm = location.state.search.toLowerCase();
   const [people, setPeople] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   console.log("Search term: ", searchTerm);
   console.log("people: ", people);
   const searchResults = [];
@@ -26,13 +29,25 @@ function SearchResults() {
   }
   useEffect(() => {
     const getPeople = async () => {
-      const snapshot = await peopleCollection.get();
-      console.log("snapshot", snapshot.docs);
-      setPeople(snapshot.docs);
+      try {
+        setLoading(true);
+        const snapshot = await peopleCollection.orderBy("firstName").get();
+        console.log("snapshot", snapshot.docs);
+        setPeople(snapshot.docs);
+        setError("");
+        setLoading(false);
+      } catch (err) {
+        setError("Error finding users");
+        setLoading(false);
+      }
     };
     getPeople();
   }, []);
   console.log(searchResults);
+
+  if (loading === true) {
+    return <LoadingSpinner />;
+  }
 
   if (searchResults.length === 0) {
     return (
@@ -44,6 +59,7 @@ function SearchResults() {
   } else {
     return (
       <div className="search">
+        {error ? <h2 className="error__message">{error}</h2> : null}
         <h3 className="search__header">Results for {searchTerm}</h3>
         <ul>
           {searchResults.map((person) => (

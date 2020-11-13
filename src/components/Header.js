@@ -6,6 +6,9 @@ import "./Header.css";
 function Header() {
   return (
     <header className="header">
+      <Link className="header__link-left" to="/add">
+        <button className="header__button">Add</button>
+      </Link>
       <Link to="/">
         <img
           className="header__image"

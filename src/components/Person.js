@@ -9,7 +9,7 @@ function Person(props) {
       <Link className="person__link" to={`/profile/${props.person.id}`}>
         <img
           className="person__image"
-          src={`/assets/${props.person.lastName}.jpg`}
+          src={`/assets/${props.person.image}.jpg`}
           alt="Person's thumbnail"
         />
         <p>

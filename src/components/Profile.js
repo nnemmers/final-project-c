@@ -13,7 +13,12 @@ function Profile(props) {
   useEffect(() => {
     const getPersonById = async () => {
       const snapshot = await peopleCollection.doc(personId).get();
-      console.log("snapshot", snapshot.doc);
+      console.log(
+        "snapshot",
+        snapshot.data().startDate.toDate().toLocaleDateString("en-US")
+      );
+      console.log(snapshot.id);
+      setFoundPerson({ id: snapshot.id, ...snapshot.data() });
     };
     getPersonById();
     const existingFavorites = JSON.parse(localStorage.getItem("favorites"));
@@ -60,7 +65,7 @@ function Profile(props) {
     <div className="profile">
       <img
         className="profile__image"
-        src={`/assets/${foundPerson.lastName}.jpg`}
+        src={`/assets/${foundPerson.image}.jpg`}
         alt="Profile"
       />
       {isFavorited ? (
@@ -94,6 +99,13 @@ function Profile(props) {
         <label>Desk</label>
         <br></br>
         {foundPerson.desk}
+      </p>
+      <p>
+        <label>Start Date</label>
+        <br></br>
+        {Object.keys(foundPerson).length > 0
+          ? foundPerson.startDate.toDate().toLocaleDateString("en-US")
+          : null}
       </p>
     </div>
   );

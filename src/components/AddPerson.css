@@ -1,0 +1,27 @@
+.person__label {
+  color: white;
+  display: block;
+}
+
+.success_message {
+  color: green;
+  margin-bottom: 2em;
+}
+
+.person__input {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  padding: 5px;
+}
+
+.person__add {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  padding: 8px 12px;
+  margin-bottom: 2em;
+  background-color: #21d6fd;
+  color: white;
+}

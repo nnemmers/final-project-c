@@ -15,8 +15,19 @@
   background-color: #191919;
 }
 
+.error__message {
+  color: red;
+  margin-bottom: 1em;
+}
+
 .header__navbar {
   display: flex;
+}
+
+.header__link-left {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .header__link {

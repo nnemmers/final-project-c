@@ -4,3 +4,5 @@ import App from "./App";
 import "./main.css";
 
 ReactDOM.render(<App />, document.querySelector("#root"));
+
+console.log(process.env);

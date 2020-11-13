@@ -4,6 +4,7 @@ import SearchResults from "./components/SearchResults";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import AddPerson from "./components/AddPerson";
 import FavoritesList from "./components/FavoritesList";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route exact path="/favorites">
           <FavoritesList />
+        </Route>
+        <Route exact path="/add">
+          <AddPerson />
         </Route>
       </Switch>
       <Footer />
