@@ -6,7 +6,7 @@ My motivation for this app is because we had a similar tool a few years ago at m
 
 ## Status
 
-The current project is complete. If I have time, I might implement a feature where the office location links to a PDF floor plan and zooms in on the specific user's deck location. This would be a useful function for those who have meetings with someone that they haven't met or don't know where they sit within the office.npm 
+The app is now connected to the database instead of pulling in local data and is fully functioning. npm
 
 ## Wireframes
 
