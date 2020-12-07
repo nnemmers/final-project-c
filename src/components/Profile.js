@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Profile.css";
-import { peopleCollection } from "../data/firebase";
-
+import { peopleCollection, usersCollection } from "../data/firebase";
+import { getUserDocument } from "../helper";
+import db from "../data/firebase";
 function Profile(props) {
+  const userRef = db.doc(`users/${props.user.uid}`);
+  console.log("file: Profile.js ~ line 9 ~ Profile ~ userRef", userRef);
+
+  console.log("is user in here", props.user.uid);
   const params = useParams();
   const [foundPerson, setFoundPerson] = useState({});
+  const [existingFavoriteId, setExistingFavoriteId] = useState(null);
   const [isFavorited, setIsFavorited] = useState(false);
   const personId = params.id; // Grab the ID of the person from the URL
 
@@ -17,47 +23,47 @@ function Profile(props) {
         "snapshot",
         snapshot.data().startDate.toDate().toLocaleDateString("en-US")
       );
+
       console.log(snapshot.id);
       setFoundPerson({ id: snapshot.id, ...snapshot.data() });
     };
     getPersonById();
-    const existingFavorites = JSON.parse(localStorage.getItem("favorites"));
-    // Check to see if the user is already favorited
-    if (existingFavorites !== null) {
-      for (let i = 0; i < existingFavorites.length; i++) {
-        const person = existingFavorites[i];
-        console.log(person);
-        if (person.id === personId) {
+
+    const getExistingFavorites = async () => {
+      const snapshot = await userRef.collection("favorites").get();
+      console.log(snapshot.docs, snapshot);
+      for (let i = 0; i < snapshot.docs.length; i++) {
+        const favoriteId = snapshot.docs[i].id;
+        const data = snapshot.docs[i].data();
+        if (data.id === personId) {
           setIsFavorited(true);
+          setExistingFavoriteId(favoriteId);
         }
       }
-    }
+    };
+
+    getExistingFavorites();
   }, [personId]);
 
   // Function that gets executed when the user presses add
-  const saveToFavorites = () => {
-    // Grab any existing favorites from our browser storage
-    let existingFavorites = JSON.parse(localStorage.getItem("favorites"));
-    if (existingFavorites == null) {
-      existingFavorites = [];
-    }
-    // Overwrite the browser storage with the new favorited person
-    existingFavorites.push(foundPerson);
-    localStorage.setItem("favorites", JSON.stringify(existingFavorites));
+  const saveToFavorites = async () => {
+    // Store that favorite in the user's favorites collection
+    const docRef = await userRef.collection("favorites").add(foundPerson);
+    console.log(
+      "file: Profile.js ~ line 58 ~ saveToFavorites ~ docRef",
+      docRef.id
+    );
     setIsFavorited(true);
+    setExistingFavoriteId(docRef.id);
   };
 
   const removeFromFavorites = () => {
-    // Remove the person from the favorites list stored in our browser
-    let existingFavorites = JSON.parse(localStorage.getItem("favorites"));
-    for (let i = 0; i < existingFavorites.length; i++) {
-      const person = existingFavorites[i];
-      if (personId === person.id) {
-        existingFavorites.splice(i, 1);
-      }
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(existingFavorites));
+    // Remove the person from the user's favorite collection
+    //by getting a ref to it and then deleting it
+    const favoriteRef = db.doc(
+      `/users/${props.user.uid}/favorites/${existingFavoriteId}`
+    );
+    favoriteRef.delete();
     setIsFavorited(false);
   };
 

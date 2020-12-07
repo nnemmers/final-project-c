@@ -11,3 +11,10 @@ The app is now connected to the database instead of pulling in local data and is
 ## Wireframes
 
 ![People Finder](wireframe.jpg)
+
+1. [x] Converting session/cookies to database
+2. [] Another custom hook
+3. [] Logout Feature
+4. [] Cleaning up any linting issues
+5. [] Change AccountInfo to Login
+6. [] Vercel
