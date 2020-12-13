@@ -8,7 +8,7 @@ import AddPerson from "./components/AddPerson";
 import FavoritesList from "./components/FavoritesList";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { auth } from "./data/firebase";
-import AccountInfo from "./components/AccountInfo";
+import Login from "./components/Login";
 import { generateUserDocument } from "./helper";
 function AuthenticatedRoute(props) {
   const { isAuthenticated, children, ...routeProps } = props;
@@ -26,14 +26,11 @@ function App() {
   const isAuthenticated = user !== null;
 
   useEffect(() => {
-    console.log("user?", user);
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
-      console.log("user?", currentUser);
-
       setUser(currentUser);
     });
     return unsubscribe;
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     async function createUser() {
@@ -52,13 +49,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header setUser={setUser} user={user} />
       <Switch>
         <AuthenticatedRoute isAuthenticated={isAuthenticated} exact path="/">
           <Home user={user} />
         </AuthenticatedRoute>
         <Route exact path="/account">
-          <AccountInfo user={user} />
+          <Login user={user} />
         </Route>
         <AuthenticatedRoute
           isAuthenticated={isAuthenticated}

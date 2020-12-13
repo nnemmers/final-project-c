@@ -43,3 +43,10 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.header__logout,
+.header__login {
+  position: absolute;
+  top: 5px;
+  right: 95px;
+}

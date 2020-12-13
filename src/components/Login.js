@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ErrorMessage from "./ErrorMessage";
 import { provider, auth } from "../data/firebase";
-import "./AccountInfo.css";
-
-function AccountInfo(props) {
+import "./Login.css";
+import { useHistory } from "react-router-dom";
+function Login(props) {
+  const history = useHistory();
   const { user } = props;
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,6 +14,7 @@ function AccountInfo(props) {
     setErrorMessage(null);
     try {
       await auth.signInWithPopup(provider);
+      history.push("/");
     } catch (error) {
       setErrorMessage("Something went wrong. Please try logging in again.");
       console.error(error);
@@ -34,7 +36,7 @@ function AccountInfo(props) {
 
   let contents;
   if (user) {
-    const { displayName, uid } = user;
+    const { displayName } = user;
     contents = (
       <>
         <p>Welcome Back, {displayName}! You can log out below</p>
@@ -77,4 +79,4 @@ function AccountInfo(props) {
   );
 }
 
-export default AccountInfo;
+export default Login;

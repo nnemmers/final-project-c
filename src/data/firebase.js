@@ -11,8 +11,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_API_ID,
 };
-console.log(process.env);
-console.log("auth domain:", process.env.REACT_APP_AUTH_DOMAIN);
 
 firebase.initializeApp(firebaseConfig);
 

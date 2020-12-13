@@ -1,38 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Person from "./Person";
-import { usersCollection } from "../data/firebase";
-import db from "../data/firebase";
+import useFavorites from "../hooks/useFavorites";
+import ErrorMessage from "./ErrorMessage";
+import LoadingSpinner from "./LoadingSpinner";
 // FavoritesList represents the listing of people who have been added to the user's favorites list
-
 function FavoritesList(props) {
-  const [favorites, setFavorites] = useState([]);
-  const userRef = db.doc(`users/${props.user.uid}`);
-  useEffect(() => {
-    // Grab the list of favorites from our browser storage to display
-    const getFavorites = async () => {
-      try {
-        const snapshot = await userRef.collection("favorites").get();
-        console.log(snapshot.docs);
-        let temp = [];
-        for (let i = 0; i < snapshot.docs.length; i++) {
-          const person = snapshot.docs[i].data();
-          temp.push(person);
-        }
-        console.log("any people in this arr", temp);
-        if (temp.length > 0) {
-          setFavorites(temp);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const [favorites, error, loading, setSort] = useFavorites(props.user);
+  if (error) {
+    return <ErrorMessage>Error loading favorites</ErrorMessage>;
+  }
 
-    getFavorites();
-  }, []);
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="favorites">
       <h2> Your Favorites </h2>
+      <select onChange={(e) => setSort(e.target.value)}>
+        <option value="firstName" defaultValue>
+          Sort By First Name
+        </option>
+        <option value="lastName">Sort By Last Name</option>
+      </select>
       {favorites.map((person) => (
         <Person key={person.id} person={person} />
       ))}

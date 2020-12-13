@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { peopleCollection } from "../data/firebase";
 import Person from "./Person";
 import LoadingSpinner from "./LoadingSpinner";
 import usePeople from "../hooks/usePeople";
@@ -9,7 +8,7 @@ import usePeople from "../hooks/usePeople";
 function SearchResults() {
   const location = useLocation();
   const searchTerm = location.state.search.toLowerCase();
-  const [searchResults, error, loading] = usePeople(searchTerm);
+  const [searchResults, error, loading, setSort] = usePeople(searchTerm);
 
   if (loading === true) {
     return <LoadingSpinner />;
@@ -27,6 +26,12 @@ function SearchResults() {
       <div className="search">
         {error ? <h2 className="error__message">{error}</h2> : null}
         <h3 className="search__header">Results for {searchTerm}</h3>
+        <select onChange={(e) => setSort(e.target.value)}>
+          <option value="firstName" defaultValue>
+            Sort By First Name
+          </option>
+          <option value="lastName">Sort By Last Name</option>
+        </select>
         <ul>
           {searchResults.map((person) => (
             <Person key={person.id} person={person} />

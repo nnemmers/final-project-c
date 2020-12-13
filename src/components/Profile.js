@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Profile.css";
-import { peopleCollection, usersCollection } from "../data/firebase";
-import { getUserDocument } from "../helper";
+import { peopleCollection } from "../data/firebase";
 import db from "../data/firebase";
 function Profile(props) {
   const userRef = db.doc(`users/${props.user.uid}`);
-  console.log("file: Profile.js ~ line 9 ~ Profile ~ userRef", userRef);
 
-  console.log("is user in here", props.user.uid);
   const params = useParams();
   const [foundPerson, setFoundPerson] = useState({});
   const [existingFavoriteId, setExistingFavoriteId] = useState(null);
@@ -43,7 +40,7 @@ function Profile(props) {
     };
 
     getExistingFavorites();
-  }, [personId]);
+  }, [personId, userRef]);
 
   // Function that gets executed when the user presses add
   const saveToFavorites = async () => {

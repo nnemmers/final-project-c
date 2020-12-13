@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { peopleCollection } from "../data/firebase";
 
 // The Search takes the input of the user and qureies the directory to return matched people listsings
@@ -7,9 +7,8 @@ function usePeople(searchTerm) {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log("Search term: ", searchTerm);
-  console.log("people: ", people);
-  const searchResults = [];
+  const [sort, setSort] = useState("firstName");
+  let searchResults = [];
   for (let i = 0; i < people.length; i++) {
     const personId = people[i].id;
     const person = people[i].data();
@@ -23,11 +22,17 @@ function usePeople(searchTerm) {
       searchResults.push(person);
     }
   }
+
+  if (sort) {
+    searchResults = searchResults.sort((a, b) => {
+      console.log(sort, a[sort], b[sort], a[sort] > b[sort]);
+      return a[sort].toLowerCase() > b[sort].toLowerCase() ? 1 : -1;
+    });
+  }
+
   useEffect(() => {
-    console.log("hello?");
     const getPeople = async () => {
       try {
-        console.log("getting people...1");
         setLoading(true);
         const snapshot = await peopleCollection.orderBy("firstName").get();
         console.log("snapshot", snapshot.docs);
@@ -35,16 +40,14 @@ function usePeople(searchTerm) {
         setError("");
         setLoading(false);
       } catch (err) {
-        console.log("getting people...2", err);
         setError("Error finding users");
         setLoading(false);
       }
     };
     getPeople();
   }, []);
-  console.log(searchResults);
 
-  return [searchResults, error, loading];
+  return [searchResults, error, loading, setSort];
 }
 
 export default usePeople;
