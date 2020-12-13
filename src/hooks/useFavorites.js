@@ -24,8 +24,8 @@ function useFavorites(user) {
         console.log("any people in this arr", temp);
         if (temp.length > 0) {
           setFavorites(temp);
-          setLoading(false);
         }
+        setLoading(false);
       } catch (err) {
         setError(err);
         setLoading(false);
